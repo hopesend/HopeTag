@@ -1,0 +1,12 @@
+c:\users\hopesend\documents\visual studio 2013\Projects\HopeTag\HopeTag\bin\Debug\HopeTag.exe.config
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\obj\Debug\HopeTag.csprojResolveAssemblyReference.cache
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\obj\Debug\HopeTag.fmHopeTag.resources
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\obj\Debug\HopeTag.Properties.Resources.resources
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\obj\Debug\HopeTag.csproj.GenerateResource.Cache
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\HopeTag.exe
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\HopeTag.pdb
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\obj\Debug\HopeTag.exe
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\obj\Debug\HopeTag.pdb
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\taglib-sharp.dll
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\policy.2.0.taglib-sharp.config
