@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tsBarraTareas = new System.Windows.Forms.ToolStrip();
-            this.btObtenerAlbumes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbBorrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbAnterior = new System.Windows.Forms.ToolStripButton();
-            this.tsbPlay = new System.Windows.Forms.ToolStripButton();
-            this.tsbStop = new System.Windows.Forms.ToolStripButton();
-            this.tsbSiguiente = new System.Windows.Forms.ToolStripButton();
-            this.tsbBajarVolumen = new System.Windows.Forms.ToolStripButton();
-            this.tsbSubirVolumen = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tcBarraTareas = new System.Windows.Forms.TabControl();
             this.tbDirectorio = new System.Windows.Forms.TabPage();
@@ -70,6 +63,7 @@
             this.tbNumeroPista = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tbAnyoTag = new System.Windows.Forms.TextBox();
@@ -79,7 +73,17 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.fbdDirectorioTrabajo = new System.Windows.Forms.FolderBrowserDialog();
-            this.button3 = new System.Windows.Forms.Button();
+            this.cmsPestanyaDirectorio = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.vaciarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btObtenerAlbumes = new System.Windows.Forms.ToolStripButton();
+            this.tsbBorrar = new System.Windows.Forms.ToolStripButton();
+            this.tsbAnterior = new System.Windows.Forms.ToolStripButton();
+            this.tsbPlay = new System.Windows.Forms.ToolStripButton();
+            this.tsbStop = new System.Windows.Forms.ToolStripButton();
+            this.tsbSiguiente = new System.Windows.Forms.ToolStripButton();
+            this.tsbBajarVolumen = new System.Windows.Forms.ToolStripButton();
+            this.tsbSubirVolumen = new System.Windows.Forms.ToolStripButton();
+            this.tspbBarraAlbumes = new System.Windows.Forms.ToolStripProgressBar();
             this.tsBarraTareas.SuspendLayout();
             this.tcBarraTareas.SuspendLayout();
             this.tbDirectorio.SuspendLayout();
@@ -91,6 +95,7 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.cmsPestanyaDirectorio.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsBarraTareas
@@ -107,111 +112,23 @@
             this.tsbSiguiente,
             this.tsbBajarVolumen,
             this.tsbSubirVolumen,
-            this.toolStripSeparator2});
+            this.toolStripSeparator2,
+            this.tspbBarraAlbumes});
             this.tsBarraTareas.Location = new System.Drawing.Point(0, 0);
             this.tsBarraTareas.Name = "tsBarraTareas";
             this.tsBarraTareas.Size = new System.Drawing.Size(828, 39);
             this.tsBarraTareas.TabIndex = 0;
             this.tsBarraTareas.Text = "toolStrip1";
             // 
-            // btObtenerAlbumes
-            // 
-            this.btObtenerAlbumes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btObtenerAlbumes.Image = global::HopeTag.Properties.Resources.Search_Folder_icon;
-            this.btObtenerAlbumes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btObtenerAlbumes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btObtenerAlbumes.Name = "btObtenerAlbumes";
-            this.btObtenerAlbumes.Size = new System.Drawing.Size(36, 36);
-            this.btObtenerAlbumes.Text = "toolStripButton1";
-            this.btObtenerAlbumes.ToolTipText = "Obtener Directorio de Trabajo";
-            this.btObtenerAlbumes.Click += new System.EventHandler(this.btObtenerAlbumes_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
-            // tsbBorrar
-            // 
-            this.tsbBorrar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbBorrar.Image = global::HopeTag.Properties.Resources.Cross_Folder_icon;
-            this.tsbBorrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbBorrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbBorrar.Name = "tsbBorrar";
-            this.tsbBorrar.Size = new System.Drawing.Size(36, 36);
-            this.tsbBorrar.Text = "toolStripButton7";
-            this.tsbBorrar.ToolTipText = "Borrar";
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
-            // 
-            // tsbAnterior
-            // 
-            this.tsbAnterior.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbAnterior.Image = global::HopeTag.Properties.Resources.skip_backward;
-            this.tsbAnterior.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbAnterior.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAnterior.Name = "tsbAnterior";
-            this.tsbAnterior.Size = new System.Drawing.Size(36, 36);
-            this.tsbAnterior.Text = "toolStripButton1";
-            this.tsbAnterior.ToolTipText = "Anterior ";
-            // 
-            // tsbPlay
-            // 
-            this.tsbPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbPlay.Image = global::HopeTag.Properties.Resources.play;
-            this.tsbPlay.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPlay.Name = "tsbPlay";
-            this.tsbPlay.Size = new System.Drawing.Size(36, 36);
-            this.tsbPlay.Text = "toolStripButton2";
-            this.tsbPlay.ToolTipText = "Play";
-            // 
-            // tsbStop
-            // 
-            this.tsbStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbStop.Image = global::HopeTag.Properties.Resources.stop;
-            this.tsbStop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbStop.Name = "tsbStop";
-            this.tsbStop.Size = new System.Drawing.Size(36, 36);
-            this.tsbStop.Text = "toolStripButton3";
-            this.tsbStop.ToolTipText = "Stop";
-            // 
-            // tsbSiguiente
-            // 
-            this.tsbSiguiente.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSiguiente.Image = global::HopeTag.Properties.Resources.skip_forward;
-            this.tsbSiguiente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbSiguiente.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSiguiente.Name = "tsbSiguiente";
-            this.tsbSiguiente.Size = new System.Drawing.Size(36, 36);
-            this.tsbSiguiente.Text = "toolStripButton4";
-            this.tsbSiguiente.ToolTipText = "Siguiente";
-            // 
-            // tsbBajarVolumen
-            // 
-            this.tsbBajarVolumen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbBajarVolumen.Image = global::HopeTag.Properties.Resources.volume_down;
-            this.tsbBajarVolumen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbBajarVolumen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbBajarVolumen.Name = "tsbBajarVolumen";
-            this.tsbBajarVolumen.Size = new System.Drawing.Size(36, 36);
-            this.tsbBajarVolumen.Text = "toolStripButton5";
-            this.tsbBajarVolumen.ToolTipText = "Bajar Volumen";
-            // 
-            // tsbSubirVolumen
-            // 
-            this.tsbSubirVolumen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSubirVolumen.Image = global::HopeTag.Properties.Resources.volume_up;
-            this.tsbSubirVolumen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbSubirVolumen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSubirVolumen.Name = "tsbSubirVolumen";
-            this.tsbSubirVolumen.Size = new System.Drawing.Size(36, 36);
-            this.tsbSubirVolumen.Text = "toolStripButton6";
-            this.tsbSubirVolumen.ToolTipText = "Subir Volumen";
             // 
             // toolStripSeparator2
             // 
@@ -253,6 +170,7 @@
             // 
             // lvAlbumes
             // 
+            this.lvAlbumes.ContextMenuStrip = this.cmsPestanyaDirectorio;
             this.lvAlbumes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvAlbumes.Location = new System.Drawing.Point(0, 0);
             this.lvAlbumes.Name = "lvAlbumes";
@@ -542,6 +460,16 @@
             this.panel4.Size = new System.Drawing.Size(273, 37);
             this.panel4.TabIndex = 7;
             // 
+            // button3
+            // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button3.Location = new System.Drawing.Point(63, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(70, 37);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Propuesta\r\nPista";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -613,15 +541,114 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Nombre del Artista";
             // 
-            // button3
+            // cmsPestanyaDirectorio
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.Location = new System.Drawing.Point(63, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 37);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Propuesta\r\nPista";
-            this.button3.UseVisualStyleBackColor = true;
+            this.cmsPestanyaDirectorio.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vaciarToolStripMenuItem});
+            this.cmsPestanyaDirectorio.Name = "cmsPestanyaDirectorio";
+            this.cmsPestanyaDirectorio.Size = new System.Drawing.Size(107, 26);
+            // 
+            // vaciarToolStripMenuItem
+            // 
+            this.vaciarToolStripMenuItem.Name = "vaciarToolStripMenuItem";
+            this.vaciarToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.vaciarToolStripMenuItem.Text = "Vaciar";
+            this.vaciarToolStripMenuItem.Click += new System.EventHandler(this.vaciarToolStripMenuItem_Click);
+            // 
+            // btObtenerAlbumes
+            // 
+            this.btObtenerAlbumes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btObtenerAlbumes.Image = global::HopeTag.Properties.Resources.Search_Folder_icon;
+            this.btObtenerAlbumes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btObtenerAlbumes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btObtenerAlbumes.Name = "btObtenerAlbumes";
+            this.btObtenerAlbumes.Size = new System.Drawing.Size(36, 36);
+            this.btObtenerAlbumes.Text = "toolStripButton1";
+            this.btObtenerAlbumes.ToolTipText = "Obtener Directorio de Trabajo";
+            this.btObtenerAlbumes.Click += new System.EventHandler(this.btObtenerAlbumes_Click);
+            // 
+            // tsbBorrar
+            // 
+            this.tsbBorrar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbBorrar.Image = global::HopeTag.Properties.Resources.Cross_Folder_icon;
+            this.tsbBorrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbBorrar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbBorrar.Name = "tsbBorrar";
+            this.tsbBorrar.Size = new System.Drawing.Size(36, 36);
+            this.tsbBorrar.Text = "toolStripButton7";
+            this.tsbBorrar.ToolTipText = "Borrar";
+            // 
+            // tsbAnterior
+            // 
+            this.tsbAnterior.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbAnterior.Image = global::HopeTag.Properties.Resources.skip_backward;
+            this.tsbAnterior.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbAnterior.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAnterior.Name = "tsbAnterior";
+            this.tsbAnterior.Size = new System.Drawing.Size(36, 36);
+            this.tsbAnterior.Text = "toolStripButton1";
+            this.tsbAnterior.ToolTipText = "Anterior ";
+            // 
+            // tsbPlay
+            // 
+            this.tsbPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbPlay.Image = global::HopeTag.Properties.Resources.play;
+            this.tsbPlay.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPlay.Name = "tsbPlay";
+            this.tsbPlay.Size = new System.Drawing.Size(36, 36);
+            this.tsbPlay.Text = "toolStripButton2";
+            this.tsbPlay.ToolTipText = "Play";
+            // 
+            // tsbStop
+            // 
+            this.tsbStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbStop.Image = global::HopeTag.Properties.Resources.stop;
+            this.tsbStop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbStop.Name = "tsbStop";
+            this.tsbStop.Size = new System.Drawing.Size(36, 36);
+            this.tsbStop.Text = "toolStripButton3";
+            this.tsbStop.ToolTipText = "Stop";
+            // 
+            // tsbSiguiente
+            // 
+            this.tsbSiguiente.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSiguiente.Image = global::HopeTag.Properties.Resources.skip_forward;
+            this.tsbSiguiente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbSiguiente.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSiguiente.Name = "tsbSiguiente";
+            this.tsbSiguiente.Size = new System.Drawing.Size(36, 36);
+            this.tsbSiguiente.Text = "toolStripButton4";
+            this.tsbSiguiente.ToolTipText = "Siguiente";
+            // 
+            // tsbBajarVolumen
+            // 
+            this.tsbBajarVolumen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbBajarVolumen.Image = global::HopeTag.Properties.Resources.volume_down;
+            this.tsbBajarVolumen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbBajarVolumen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbBajarVolumen.Name = "tsbBajarVolumen";
+            this.tsbBajarVolumen.Size = new System.Drawing.Size(36, 36);
+            this.tsbBajarVolumen.Text = "toolStripButton5";
+            this.tsbBajarVolumen.ToolTipText = "Bajar Volumen";
+            // 
+            // tsbSubirVolumen
+            // 
+            this.tsbSubirVolumen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSubirVolumen.Image = global::HopeTag.Properties.Resources.volume_up;
+            this.tsbSubirVolumen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbSubirVolumen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSubirVolumen.Name = "tsbSubirVolumen";
+            this.tsbSubirVolumen.Size = new System.Drawing.Size(36, 36);
+            this.tsbSubirVolumen.Text = "toolStripButton6";
+            this.tsbSubirVolumen.ToolTipText = "Subir Volumen";
+            // 
+            // tspbBarraAlbumes
+            // 
+            this.tspbBarraAlbumes.Name = "tspbBarraAlbumes";
+            this.tspbBarraAlbumes.Size = new System.Drawing.Size(110, 36);
+            this.tspbBarraAlbumes.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // fmHopeTag
             // 
@@ -633,6 +660,7 @@
             this.Name = "fmHopeTag";
             this.Text = "fmHopeTag";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fmHopeTag_FormClosed);
             this.Load += new System.EventHandler(this.fmHopeTag_Load);
             this.tsBarraTareas.ResumeLayout(false);
             this.tsBarraTareas.PerformLayout();
@@ -648,6 +676,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.cmsPestanyaDirectorio.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -706,5 +735,8 @@
         private System.Windows.Forms.TextBox tbNumeroPista;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ContextMenuStrip cmsPestanyaDirectorio;
+        private System.Windows.Forms.ToolStripMenuItem vaciarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripProgressBar tspbBarraAlbumes;
     }
 }

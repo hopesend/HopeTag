@@ -17,6 +17,7 @@ namespace HopeTag
         #region Variables publicas
 
         public List<Album> listaAlbumes;
+        public string directorioConfiguracion = string.Empty;
 
         #endregion
 
@@ -33,6 +34,29 @@ namespace HopeTag
         private void fmHopeTag_Load(object sender, EventArgs e)
         {
             listaAlbumes = new List<Album>();
+
+            directorioConfiguracion = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "config.xml");
+            if(System.IO.File.Exists(directorioConfiguracion))
+            {
+                cXML nuevoXml = new cXML();
+                listaAlbumes = nuevoXml.Cargar_Clase_Serializable<List<Album>>(directorioConfiguracion, listaAlbumes);
+                Insertar_Lista_Albumes();
+                nuevoXml.Cerrar();
+            }
+        }
+
+        private void fmHopeTag_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(listaAlbumes.Count > 0)
+            {
+                cXML nuevoXml = new cXML();
+                nuevoXml.Guardar_Clase_Serializable<List<Album>>(directorioConfiguracion, listaAlbumes);
+                nuevoXml.Cerrar();
+            }
+            else
+            {
+                System.IO.File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "config.xml"));
+            }
         }
 
         #endregion
@@ -202,6 +226,12 @@ namespace HopeTag
             }
         }
 
+        private void vaciarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lvAlbumes.Clear();
+            listaAlbumes = new List<Album>();
+        }
+
         #endregion
 
         #region Pestaña Canciones
@@ -226,13 +256,18 @@ namespace HopeTag
 
         private void Capturar_Albumes(string pathDirectorioTrabajo)
         {
-            //TODO: vaciar controles
+            lvAlbumes.Clear();
+            listaAlbumes = new List<Album>();
+
+            Inicializar_BarraAlbumes(Directory.EnumerateDirectories(pathDirectorioTrabajo).Count());
+
             foreach(string directorioCapturado in Directory.EnumerateDirectories(pathDirectorioTrabajo))
             {
                 if (Es_Directorio_Mp3(directorioCapturado))
                 {
                     Album nuevoAlbum = new Album(directorioCapturado);
                     listaAlbumes.Add(nuevoAlbum);
+
                     ListViewItem nuevoItem = new ListViewItem();
 
                     nuevoItem.ForeColor = nuevoAlbum.NombreArtista == null ? Color.Red : Color.Green;
@@ -244,9 +279,30 @@ namespace HopeTag
                 {
                     Capturar_Subniveles_Album(directorioCapturado);
                 }
-                
 
+                Progreso_BarraAlbumes();
             }
+
+            Finalizar_BarraAlbumes();
+        }
+
+        private void Insertar_Lista_Albumes()
+        {
+            Inicializar_BarraAlbumes(listaAlbumes.Count);
+
+            foreach(Album albumSeleccionado in listaAlbumes)
+            {
+                ListViewItem nuevoItem = new ListViewItem();
+
+                nuevoItem.ForeColor = albumSeleccionado.NombreArtista == null ? Color.Red : Color.Green;
+                nuevoItem.Text = albumSeleccionado.NombreCompletoAlbum;
+
+                lvAlbumes.Items.Add(nuevoItem);
+
+                Progreso_BarraAlbumes();
+            }
+
+            Finalizar_BarraAlbumes();
         }
 
         private Album Buscar_Album(string nombreCompletoAlbum)
@@ -312,6 +368,7 @@ namespace HopeTag
                 {
                     Album nuevoAlbum = new Album(directorioColgante, true);
                     listaAlbumes.Add(nuevoAlbum);
+
                     ListViewItem nuevoItem = new ListViewItem();
 
                     nuevoItem.ForeColor = nuevoAlbum.NombreArtista == null ? Color.Red : Color.Green;
@@ -383,8 +440,23 @@ namespace HopeTag
             }
         }
 
-        #endregion             
+        private void Inicializar_BarraAlbumes(int total)
+        {
+            tspbBarraAlbumes.Maximum = total;
+            tspbBarraAlbumes.Step = 1;
+            tspbBarraAlbumes.Value = 0;
+        }
 
-        
+        private void Progreso_BarraAlbumes()
+        {
+            tspbBarraAlbumes.PerformStep();
+        }
+
+        private void Finalizar_BarraAlbumes()
+        {
+            tspbBarraAlbumes.Value = 0;
+        }
+
+        #endregion             
     }
 }

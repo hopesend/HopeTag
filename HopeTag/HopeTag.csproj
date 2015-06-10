@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Album.cs" />
     <Compile Include="Cancion.cs" />
+    <Compile Include="cXML.cs" />
     <Compile Include="fmHopeTag.cs">
       <SubType>Form</SubType>
     </Compile>
