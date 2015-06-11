@@ -367,6 +367,37 @@ namespace HopeTag
             }
         }
 
+        private void btTransformar_Click(object sender, EventArgs e)
+        {
+            //Poner Punto
+            foreach(ListViewItem item in lvCanciones.Items)
+            {
+                Cancion cancionSeleccionada = Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), item.Text);
+
+                if (item.Text[2] != '.')
+                    item.Text = item.Text.Insert(2, ".");
+
+                for (int cont = 0; cont < item.Text.Length; cont++)
+                {
+                    switch (item.Text[cont])
+                    {
+                        case ' ':
+                        case '(':
+                        case '[':
+                        case '-':
+                            {
+                                char[] a = item.Text.ToCharArray();
+                                a[cont + 1] = char.ToUpper(a[cont + 1]);
+                                item.Text = new string(a);
+                                break;
+                            }
+                    }
+                }
+
+                cancionSeleccionada.NombreCompletoPista = item.Text;
+            }
+        }
+
         #endregion
 
         #region Metodos
@@ -588,8 +619,6 @@ namespace HopeTag
             return true;
         }
 
-        #endregion             
-
-        
+        #endregion                
     }
 }

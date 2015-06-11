@@ -69,6 +69,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lvCanciones = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.btModificarNombre = new System.Windows.Forms.Button();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.tbArchivoMp3 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btPropuestaPista = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -86,21 +91,17 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lbBitrate = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tbCaracteresDespues = new System.Windows.Forms.TextBox();
             this.tbCaracteresAntes = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btTransformar = new System.Windows.Forms.Button();
             this.btCambiarCaracteres = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.fbdDirectorioTrabajo = new System.Windows.Forms.FolderBrowserDialog();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.tbArchivoMp3 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.btModificarNombre = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lbBitrate = new System.Windows.Forms.Label();
             this.tsBarraTareas.SuspendLayout();
             this.tcBarraTareas.SuspendLayout();
             this.tbDirectorio.SuspendLayout();
@@ -112,14 +113,14 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsBarraTareas
@@ -275,7 +276,7 @@
             this.tbDirectorio.Location = new System.Drawing.Point(4, 22);
             this.tbDirectorio.Name = "tbDirectorio";
             this.tbDirectorio.Padding = new System.Windows.Forms.Padding(3);
-            this.tbDirectorio.Size = new System.Drawing.Size(820, 535);
+            this.tbDirectorio.Size = new System.Drawing.Size(820, 701);
             this.tbDirectorio.TabIndex = 0;
             this.tbDirectorio.Text = "Directorio";
             this.tbDirectorio.UseVisualStyleBackColor = true;
@@ -286,7 +287,7 @@
             this.pnListViewAlbum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnListViewAlbum.Location = new System.Drawing.Point(3, 3);
             this.pnListViewAlbum.Name = "pnListViewAlbum";
-            this.pnListViewAlbum.Size = new System.Drawing.Size(541, 529);
+            this.pnListViewAlbum.Size = new System.Drawing.Size(541, 695);
             this.pnListViewAlbum.TabIndex = 0;
             // 
             // lvAlbumes
@@ -296,7 +297,7 @@
             this.lvAlbumes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvAlbumes.Location = new System.Drawing.Point(0, 0);
             this.lvAlbumes.Name = "lvAlbumes";
-            this.lvAlbumes.Size = new System.Drawing.Size(541, 529);
+            this.lvAlbumes.Size = new System.Drawing.Size(541, 695);
             this.lvAlbumes.TabIndex = 1;
             this.lvAlbumes.UseCompatibleStateImageBehavior = false;
             this.lvAlbumes.View = System.Windows.Forms.View.List;
@@ -334,7 +335,7 @@
             this.pnInfoAlbum.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnInfoAlbum.Location = new System.Drawing.Point(544, 3);
             this.pnInfoAlbum.Name = "pnInfoAlbum";
-            this.pnInfoAlbum.Size = new System.Drawing.Size(273, 529);
+            this.pnInfoAlbum.Size = new System.Drawing.Size(273, 695);
             this.pnInfoAlbum.TabIndex = 1;
             // 
             // label4
@@ -414,7 +415,7 @@
             this.pnBotonesDirectorio.Controls.Add(this.btPropuesta);
             this.pnBotonesDirectorio.Controls.Add(this.btGuardarDirectorio);
             this.pnBotonesDirectorio.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnBotonesDirectorio.Location = new System.Drawing.Point(0, 492);
+            this.pnBotonesDirectorio.Location = new System.Drawing.Point(0, 658);
             this.pnBotonesDirectorio.Name = "pnBotonesDirectorio";
             this.pnBotonesDirectorio.Size = new System.Drawing.Size(273, 37);
             this.pnBotonesDirectorio.TabIndex = 7;
@@ -548,6 +549,53 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(273, 701);
             this.panel3.TabIndex = 2;
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.btModificarNombre);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(0, 454);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(273, 34);
+            this.panel11.TabIndex = 18;
+            // 
+            // btModificarNombre
+            // 
+            this.btModificarNombre.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btModificarNombre.Location = new System.Drawing.Point(0, 0);
+            this.btModificarNombre.Name = "btModificarNombre";
+            this.btModificarNombre.Size = new System.Drawing.Size(273, 34);
+            this.btModificarNombre.TabIndex = 11;
+            this.btModificarNombre.Text = "Modificar Nombre";
+            this.btModificarNombre.UseVisualStyleBackColor = true;
+            this.btModificarNombre.Click += new System.EventHandler(this.btModificarNombre_Click);
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.tbArchivoMp3);
+            this.panel10.Controls.Add(this.label12);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(0, 389);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(273, 65);
+            this.panel10.TabIndex = 17;
+            // 
+            // tbArchivoMp3
+            // 
+            this.tbArchivoMp3.Location = new System.Drawing.Point(6, 36);
+            this.tbArchivoMp3.Name = "tbArchivoMp3";
+            this.tbArchivoMp3.Size = new System.Drawing.Size(259, 20);
+            this.tbArchivoMp3.TabIndex = 27;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(6, 7);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(107, 18);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Archivo Pista";
             // 
             // panel9
             // 
@@ -714,6 +762,26 @@
             this.panel5.Size = new System.Drawing.Size(273, 117);
             this.panel5.TabIndex = 12;
             // 
+            // lbBitrate
+            // 
+            this.lbBitrate.AutoSize = true;
+            this.lbBitrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBitrate.Location = new System.Drawing.Point(220, 88);
+            this.lbBitrate.Name = "lbBitrate";
+            this.lbBitrate.Size = new System.Drawing.Size(16, 18);
+            this.lbBitrate.TabIndex = 21;
+            this.lbBitrate.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(211, 65);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(57, 18);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Bitrate";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -750,6 +818,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btTransformar);
             this.panel4.Controls.Add(this.btCambiarCaracteres);
             this.panel4.Controls.Add(this.button2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -757,6 +826,17 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(273, 37);
             this.panel4.TabIndex = 7;
+            // 
+            // btTransformar
+            // 
+            this.btTransformar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btTransformar.Location = new System.Drawing.Point(133, 0);
+            this.btTransformar.Name = "btTransformar";
+            this.btTransformar.Size = new System.Drawing.Size(72, 37);
+            this.btTransformar.TabIndex = 11;
+            this.btTransformar.Text = "Transformar";
+            this.btTransformar.UseVisualStyleBackColor = true;
+            this.btTransformar.Click += new System.EventHandler(this.btTransformar_Click);
             // 
             // btCambiarCaracteres
             // 
@@ -778,73 +858,6 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "Guardar";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.tbArchivoMp3);
-            this.panel10.Controls.Add(this.label12);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 389);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(273, 65);
-            this.panel10.TabIndex = 17;
-            // 
-            // tbArchivoMp3
-            // 
-            this.tbArchivoMp3.Location = new System.Drawing.Point(6, 36);
-            this.tbArchivoMp3.Name = "tbArchivoMp3";
-            this.tbArchivoMp3.Size = new System.Drawing.Size(259, 20);
-            this.tbArchivoMp3.TabIndex = 27;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 7);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(107, 18);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "Archivo Pista";
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.btModificarNombre);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(0, 454);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(273, 34);
-            this.panel11.TabIndex = 18;
-            // 
-            // btModificarNombre
-            // 
-            this.btModificarNombre.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btModificarNombre.Location = new System.Drawing.Point(0, 0);
-            this.btModificarNombre.Name = "btModificarNombre";
-            this.btModificarNombre.Size = new System.Drawing.Size(273, 34);
-            this.btModificarNombre.TabIndex = 11;
-            this.btModificarNombre.Text = "Modificar Nombre";
-            this.btModificarNombre.UseVisualStyleBackColor = true;
-            this.btModificarNombre.Click += new System.EventHandler(this.btModificarNombre_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(211, 65);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 18);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Bitrate";
-            // 
-            // lbBitrate
-            // 
-            this.lbBitrate.AutoSize = true;
-            this.lbBitrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBitrate.Location = new System.Drawing.Point(220, 88);
-            this.lbBitrate.Name = "lbBitrate";
-            this.lbBitrate.Size = new System.Drawing.Size(16, 18);
-            this.lbBitrate.TabIndex = 21;
-            this.lbBitrate.Text = "0";
             // 
             // fmHopeTag
             // 
@@ -871,6 +884,9 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
@@ -880,9 +896,6 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.panel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -961,5 +974,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lbBitrate;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btTransformar;
     }
 }
