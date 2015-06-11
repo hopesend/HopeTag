@@ -92,6 +92,36 @@ namespace HopeTag
             }
         }
 
+        private void tsbBorrar_Click(object sender, EventArgs e)
+        {
+            switch (tcBarraTareas.SelectedIndex)
+            {
+                case 0: //Directorio
+                    {
+                        foreach (ListViewItem itemSeleccionado in lvAlbumes.SelectedItems)
+                        {
+                            System.IO.Directory.Delete(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text).PathArchivo, true);
+                            listaAlbumes.Remove(Buscar_Album(lvAlbumes.SelectedItems[0].Text));
+                            lvAlbumes.Items.Remove(itemSeleccionado);
+                        }
+
+                        break;
+                    }
+
+                case 1: //Canciones
+                    {
+                        foreach(ListViewItem itemSeleccionado in lvCanciones.SelectedItems)
+                        {
+                            System.IO.File.Delete(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text).PathArchivo);
+                            Buscar_Album(lvAlbumes.SelectedItems[0].Text).ListaCanciones.Remove(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text));
+                            lvCanciones.Items.Remove(itemSeleccionado);
+                        }
+
+                        break;
+                    }
+            }
+        }
+
         #endregion
 
         #region Pestaña Directorio
@@ -245,8 +275,95 @@ namespace HopeTag
 
                 tbNumeroPista.Text = cancionSeleccionada.NumeroPista.ToString();
                 tbTituloPista.Text = cancionSeleccionada.NombrePista;
-                //Comprobar_Tags(lvCanciones.SelectedItems);
+                tbArchivoMp3.Text = lvCanciones.SelectedItems[0].Text;
+                lbBitrate.Text = cancionSeleccionada.Bitrate.ToString();
+            }
+        }
 
+        private void btPropuestaAlbum_Click(object sender, EventArgs e)
+        {
+            tbArtistaTag.Text = tbArtista.Text;
+            tbAnyoTag.Text = tbAnyo.Text;
+            tbAlbumTag.Text = tbAlbum.Text;
+        }
+
+        private void btPropuestaPista_Click(object sender, EventArgs e)
+        {
+            if(lvCanciones.SelectedItems.Count > 0)
+            {
+                Cancion cancionSeleccionada = Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), lvCanciones.SelectedItems[0].Text);
+
+                if(Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Contains('.'))
+                {
+                    if (Es_Numerico(Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('.')[0].Trim()))
+                        tbNumeroPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('.')[0].Trim();
+                    else
+                        tbNumeroPista.Text = "0";
+                    cancionSeleccionada.NumeroPista = int.Parse(tbNumeroPista.Text);
+
+                    if (Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('.')[1].Contains('_'))
+                        tbTituloPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('.')[1].Replace('_', ' ');
+                    else
+                        tbTituloPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('.')[1];
+                    cancionSeleccionada.NombrePista = tbTituloPista.Text;
+
+                    return;
+                }
+
+                if (Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Contains('-'))
+                {
+                    if (Es_Numerico(Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('-')[0].Trim()))
+                        tbNumeroPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('-')[0].Trim();
+                    else
+                        tbNumeroPista.Text = "0";
+                    cancionSeleccionada.NumeroPista = int.Parse(tbNumeroPista.Text);
+
+                    if (Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('-')[1].Contains('_'))
+                        tbTituloPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('-')[1].Replace('_', ' ');
+                    else
+                        tbTituloPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('-')[1];
+                    cancionSeleccionada.NombrePista = tbTituloPista.Text;
+
+                    return;
+                }
+
+                if (Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Contains('_'))
+                {
+                    if (Es_Numerico(Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('_')[0].Trim()))
+                        tbNumeroPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('_')[0].Trim();
+                    else
+                        tbNumeroPista.Text = "0";
+                    cancionSeleccionada.NumeroPista = int.Parse(tbNumeroPista.Text);
+
+                    tbTituloPista.Text = Path.GetFileNameWithoutExtension(cancionSeleccionada.NombreCompletoPista).Split('_')[1];
+                    cancionSeleccionada.NombrePista = tbTituloPista.Text;
+
+                    return;
+                }
+            }
+        }
+
+        private void btCambiarCaracteres_Click(object sender, EventArgs e)
+        {
+            if (tbCaracteresAntes.Text.Equals(string.Empty) || tbCaracteresDespues.Text.Equals(string.Empty))
+                MessageBox.Show("Debe de introducir como minimo un caracter a cambiar", "ERROR");
+            else
+            {
+                foreach(ListViewItem cancion in lvCanciones.Items)
+                {
+                    Cancion cancionSeleccionada = Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), cancion.Text);
+                    cancion.Text = cancion.Text.Replace(tbCaracteresAntes.Text, tbCaracteresDespues.Text);
+                    cancionSeleccionada.NombreCompletoPista = cancion.Text;
+                }
+            }
+        }
+
+        private void btModificarNombre_Click(object sender, EventArgs e)
+        {
+            if(lvCanciones.SelectedItems.Count > 0)
+            {
+                Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), lvCanciones.SelectedItems[0].Text).NombreCompletoPista = tbArchivoMp3.Text;
+                lvCanciones.SelectedItems[0].Text = tbArchivoMp3.Text;              
             }
         }
 
@@ -457,6 +574,22 @@ namespace HopeTag
             tspbBarraAlbumes.Value = 0;
         }
 
+        private bool Es_Numerico(string cadena)
+        {
+            for (byte cont = 0; cont < cadena.Length; cont++)
+            {
+                if (!char.IsDigit(cadena[cont]))
+                {
+                    if (cadena[cont] != '.' && cadena[cont] != ',')
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
         #endregion             
+
+        
     }
 }

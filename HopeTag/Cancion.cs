@@ -60,6 +60,13 @@ namespace HopeTag
             set { tagAnyo = value; }
         }
 
+        private int bitrate;
+        public int Bitrate
+        {
+            get { return bitrate; }
+            set { bitrate = value; }
+        }
+
         public Cancion()
         {
 
@@ -96,6 +103,8 @@ namespace HopeTag
 
             if(file.Tag.Title != null)
                 NombrePista = file.Tag.Title;
+
+            Bitrate = (int)file.Properties.AudioBitrate;
 
             file.Dispose();
         }
