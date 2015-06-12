@@ -48,6 +48,7 @@
             this.lvAlbumes = new System.Windows.Forms.ListView();
             this.cmsPestanyaDirectorio = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.vaciarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refrescarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnInfoAlbum = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.lvSplit = new System.Windows.Forms.ListView();
@@ -100,7 +101,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.btTransformar = new System.Windows.Forms.Button();
             this.btCambiarCaracteres = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btGuardar = new System.Windows.Forms.Button();
             this.fbdDirectorioTrabajo = new System.Windows.Forms.FolderBrowserDialog();
             this.tsBarraTareas.SuspendLayout();
             this.tcBarraTareas.SuspendLayout();
@@ -306,16 +307,24 @@
             // cmsPestanyaDirectorio
             // 
             this.cmsPestanyaDirectorio.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vaciarToolStripMenuItem});
+            this.vaciarToolStripMenuItem,
+            this.refrescarToolStripMenuItem});
             this.cmsPestanyaDirectorio.Name = "cmsPestanyaDirectorio";
-            this.cmsPestanyaDirectorio.Size = new System.Drawing.Size(107, 26);
+            this.cmsPestanyaDirectorio.Size = new System.Drawing.Size(123, 48);
             // 
             // vaciarToolStripMenuItem
             // 
             this.vaciarToolStripMenuItem.Name = "vaciarToolStripMenuItem";
-            this.vaciarToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.vaciarToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.vaciarToolStripMenuItem.Text = "Vaciar";
             this.vaciarToolStripMenuItem.Click += new System.EventHandler(this.vaciarToolStripMenuItem_Click);
+            // 
+            // refrescarToolStripMenuItem
+            // 
+            this.refrescarToolStripMenuItem.Name = "refrescarToolStripMenuItem";
+            this.refrescarToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.refrescarToolStripMenuItem.Text = "Refrescar";
+            this.refrescarToolStripMenuItem.Click += new System.EventHandler(this.refrescarToolStripMenuItem_Click);
             // 
             // pnInfoAlbum
             // 
@@ -820,7 +829,7 @@
             // 
             this.panel4.Controls.Add(this.btTransformar);
             this.panel4.Controls.Add(this.btCambiarCaracteres);
-            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.btGuardar);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 664);
             this.panel4.Name = "panel4";
@@ -849,15 +858,16 @@
             this.btCambiarCaracteres.UseVisualStyleBackColor = true;
             this.btCambiarCaracteres.Click += new System.EventHandler(this.btCambiarCaracteres_Click);
             // 
-            // button2
+            // btGuardar
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.Location = new System.Drawing.Point(205, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(68, 37);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Guardar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btGuardar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btGuardar.Location = new System.Drawing.Point(205, 0);
+            this.btGuardar.Name = "btGuardar";
+            this.btGuardar.Size = new System.Drawing.Size(68, 37);
+            this.btGuardar.TabIndex = 7;
+            this.btGuardar.Text = "Guardar";
+            this.btGuardar.UseVisualStyleBackColor = true;
+            this.btGuardar.Click += new System.EventHandler(this.btGuardar_Click);
             // 
             // fmHopeTag
             // 
@@ -940,7 +950,7 @@
         private System.Windows.Forms.ListView lvCanciones;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btGuardar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ContextMenuStrip cmsPestanyaDirectorio;
         private System.Windows.Forms.ToolStripMenuItem vaciarToolStripMenuItem;
@@ -975,5 +985,6 @@
         private System.Windows.Forms.Label lbBitrate;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btTransformar;
+        private System.Windows.Forms.ToolStripMenuItem refrescarToolStripMenuItem;
     }
 }

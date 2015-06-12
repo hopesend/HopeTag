@@ -17,7 +17,11 @@ namespace HopeTag
         #region Variables publicas
 
         public List<Album> listaAlbumes;
+        public Configuracion configuracionPrograma;
         public string directorioConfiguracion = string.Empty;
+        public string archivoConfiguracion = string.Empty;
+        public string archivoListaMp3 = string.Empty;
+        public string directorioTrabajo = string.Empty;
 
         #endregion
 
@@ -34,29 +38,39 @@ namespace HopeTag
         private void fmHopeTag_Load(object sender, EventArgs e)
         {
             listaAlbumes = new List<Album>();
+            configuracionPrograma = new Configuracion();
 
-            directorioConfiguracion = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "config.xml");
-            if(System.IO.File.Exists(directorioConfiguracion))
+            directorioConfiguracion = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            archivoConfiguracion = Path.Combine(directorioConfiguracion, "HopeTagMp3Config.xml");
+            archivoListaMp3 = Path.Combine(directorioConfiguracion, "HopeTagMp3ListTemp.xml");
+            if (System.IO.File.Exists(archivoListaMp3))
             {
                 cXML nuevoXml = new cXML();
-                listaAlbumes = nuevoXml.Cargar_Clase_Serializable<List<Album>>(directorioConfiguracion, listaAlbumes);
+                listaAlbumes = nuevoXml.Cargar_Clase_Serializable<List<Album>>(archivoListaMp3, listaAlbumes);
                 Insertar_Lista_Albumes();
+                nuevoXml.Cerrar();
+            }
+
+            if (System.IO.File.Exists(archivoConfiguracion))
+            {
+                cXML nuevoXml = new cXML();
+                configuracionPrograma = nuevoXml.Cargar_Clase_Serializable<Configuracion>(archivoConfiguracion, configuracionPrograma);
                 nuevoXml.Cerrar();
             }
         }
 
         private void fmHopeTag_FormClosed(object sender, FormClosedEventArgs e)
         {
+            cXML nuevoXml = new cXML();
+
             if(listaAlbumes.Count > 0)
-            {
-                cXML nuevoXml = new cXML();
-                nuevoXml.Guardar_Clase_Serializable<List<Album>>(directorioConfiguracion, listaAlbumes);
-                nuevoXml.Cerrar();
-            }
+                nuevoXml.Guardar_Clase_Serializable<List<Album>>(archivoListaMp3, listaAlbumes);
             else
-            {
-                System.IO.File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "config.xml"));
-            }
+                System.IO.File.Delete(Path.Combine(directorioConfiguracion, "HopeTagMp3ListTemp.xml"));
+
+            nuevoXml.Guardar_Clase_Serializable<Configuracion>(archivoConfiguracion, configuracionPrograma);
+
+            nuevoXml.Cerrar();
         }
 
         #endregion
@@ -88,6 +102,7 @@ namespace HopeTag
         {
             if(fbdDirectorioTrabajo.ShowDialog() == DialogResult.OK)
             {
+                configuracionPrograma.pathArchivosMp3 = fbdDirectorioTrabajo.SelectedPath;
                 Capturar_Albumes(fbdDirectorioTrabajo.SelectedPath);
             }
         }
@@ -100,9 +115,12 @@ namespace HopeTag
                     {
                         foreach (ListViewItem itemSeleccionado in lvAlbumes.SelectedItems)
                         {
-                            System.IO.Directory.Delete(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text).PathArchivo, true);
-                            listaAlbumes.Remove(Buscar_Album(lvAlbumes.SelectedItems[0].Text));
-                            lvAlbumes.Items.Remove(itemSeleccionado);
+                            if (MessageBox.Show("¿Esta seguro de Borrar el Directorio?", "Atencion", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                            {
+                                System.IO.Directory.Delete(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text).PathArchivo, true);
+                                listaAlbumes.Remove(Buscar_Album(lvAlbumes.SelectedItems[0].Text));
+                                lvAlbumes.Items.Remove(itemSeleccionado);
+                            }
                         }
 
                         break;
@@ -110,11 +128,15 @@ namespace HopeTag
 
                 case 1: //Canciones
                     {
-                        foreach(ListViewItem itemSeleccionado in lvCanciones.SelectedItems)
+                        if (MessageBox.Show("¿Esta seguro de Borrar los Archivos?", "Atencion", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
-                            System.IO.File.Delete(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text).PathArchivo);
-                            Buscar_Album(lvAlbumes.SelectedItems[0].Text).ListaCanciones.Remove(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text));
-                            lvCanciones.Items.Remove(itemSeleccionado);
+                            foreach (ListViewItem itemSeleccionado in lvCanciones.SelectedItems)
+                            {
+
+                                System.IO.File.Delete(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text).PathArchivo);
+                                Buscar_Album(lvAlbumes.SelectedItems[0].Text).ListaCanciones.Remove(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), itemSeleccionado.Text));
+                                lvCanciones.Items.Remove(itemSeleccionado);
+                            }
                         }
 
                         break;
@@ -262,6 +284,11 @@ namespace HopeTag
             listaAlbumes = new List<Album>();
         }
 
+        private void refrescarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Capturar_Albumes(configuracionPrograma.pathArchivosMp3);
+        }
+
         #endregion
 
         #region Pestaña Canciones
@@ -396,6 +423,19 @@ namespace HopeTag
 
                 cancionSeleccionada.NombreCompletoPista = item.Text;
             }
+        }
+
+        private void btGuardar_Click(object sender, EventArgs e)
+        {
+            Inicializar_BarraAlbumes(Buscar_Album(lvAlbumes.SelectedItems[0].Text).ListaCanciones.Count);
+
+            foreach (Cancion cancionSeleccionada in Buscar_Album(lvAlbumes.SelectedItems[0].Text).ListaCanciones)
+            {
+                cancionSeleccionada.Grabar_Datos_Tag();
+                Progreso_BarraAlbumes();
+            }
+
+            Finalizar_BarraAlbumes();
         }
 
         #endregion

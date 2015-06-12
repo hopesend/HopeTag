@@ -116,10 +116,20 @@ namespace HopeTag
                 Vaciar_Tags(file);
 
                 file.Tag.AlbumArtists = new string[] { TagArtista };
+                file.Tag.Performers = new string[] { TagArtista };
                 file.Tag.Album = TagAlbum;
                 file.Tag.Year = Convert.ToUInt16(TagAnyo);
+                file.Tag.Track = Convert.ToUInt16(NumeroPista);
+                file.Tag.Title = NombrePista;
                 file.Tag.Comment = "Candarian Demon";
+
+                file.Save();
+                file.Dispose();
             }
+
+            string nuevoPath = Path.Combine(Path.GetDirectoryName(PathArchivo), NombreCompletoPista);
+            if(!nuevoPath.Equals(PathArchivo))
+                System.IO.File.Move(PathArchivo, nuevoPath);
         }
 
         private void Vaciar_Tags(TagLib.File file)
