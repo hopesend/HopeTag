@@ -10,3 +10,5 @@ C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\obj\Debu
 C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\policy.2.0.taglib-sharp.dll
 C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\taglib-sharp.dll
 C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\NAudio.dll
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\HopeTag\HopeTag\bin\Debug\NAudio.xml

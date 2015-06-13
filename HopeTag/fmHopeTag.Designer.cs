@@ -201,6 +201,7 @@
             this.tsbPlay.Size = new System.Drawing.Size(36, 36);
             this.tsbPlay.Text = "toolStripButton2";
             this.tsbPlay.ToolTipText = "Play";
+            this.tsbPlay.Click += new System.EventHandler(this.tsbPlay_Click);
             // 
             // tsbStop
             // 

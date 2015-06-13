@@ -22,6 +22,7 @@ namespace HopeTag
         public string archivoConfiguracion = string.Empty;
         public string archivoListaMp3 = string.Empty;
         public string directorioTrabajo = string.Empty;
+        public Reproduccion reproductorMp3;
 
         #endregion
 
@@ -39,6 +40,7 @@ namespace HopeTag
         {
             listaAlbumes = new List<Album>();
             configuracionPrograma = new Configuracion();
+            reproductorMp3 = new Reproduccion();
 
             directorioConfiguracion = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             archivoConfiguracion = Path.Combine(directorioConfiguracion, "HopeTagMp3Config.xml");
@@ -71,6 +73,8 @@ namespace HopeTag
             nuevoXml.Guardar_Clase_Serializable<Configuracion>(archivoConfiguracion, configuracionPrograma);
 
             nuevoXml.Cerrar();
+
+            reproductorMp3.Cerrar();
         }
 
         #endregion
@@ -143,6 +147,38 @@ namespace HopeTag
                     }
             }
         }
+
+        #region Reproductor
+        private void tsbPlay_Click(object sender, EventArgs e)
+        {
+            switch (tcBarraTareas.SelectedIndex)
+            {
+                case 0: //Directorio
+                    {
+                        foreach(ListViewItem item in lvAlbumes.SelectedItems)
+                        {
+                            foreach (Cancion cancion in Buscar_Album(item.Text).ListaCanciones)
+                            {
+                                reproductorMp3.Add_Cancion_Lista_Reproduccion(cancion.PathArchivo);
+                            }
+                        }
+                        break;
+                    }
+
+                case 1: //Canciones
+                    {
+                        foreach (ListViewItem item in lvCanciones.SelectedItems)
+                        {
+                            reproductorMp3.Add_Cancion_Lista_Reproduccion(Buscar_Cancion(Buscar_Album(lvAlbumes.SelectedItems[0].Text), item.Text).PathArchivo);
+                        }
+                        break;
+                    }
+            }
+
+            reproductorMp3.Play();
+        }
+
+        #endregion
 
         #endregion
 
@@ -660,5 +696,7 @@ namespace HopeTag
         }
 
         #endregion                
+
+        
     }
 }

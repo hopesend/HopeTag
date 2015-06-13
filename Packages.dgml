@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
-  <Nodes />
-  <Links />
+  <Nodes>
+    <Node Id="HopeTag" Label="HopeTag" Category="Proyecto" />
+    <Node Id="NAudio 1.7.3" Label="NAudio 1.7.3" Category="Paquete" />
+    <Node Id="taglib 2.1.0.0" Label="taglib 2.1.0.0" Category="Paquete" />
+  </Nodes>
+  <Links>
+    <Link Source="HopeTag" Target="NAudio 1.7.3" Category="Paquete instalado" />
+    <Link Source="HopeTag" Target="taglib 2.1.0.0" Category="Paquete instalado" />
+  </Links>
   <Categories>
     <Category Id="Proyecto" />
     <Category Id="Paquete" />
