@@ -16,9 +16,9 @@ namespace HopeTag
     }
     public class Reproduccion
     {
-        private Thread Hilo;
         private IWavePlayer waveOutDevice;
-        private AudioFileReader audioFileReader;
+        private WaveStream mp3Reader;
+        private WaveStream waveReader;
 
         private List<string> listaReproduccion;
         public List<string> ListaReproduccion
@@ -43,14 +43,13 @@ namespace HopeTag
 
         public void Play()
         {
-            Hilo = new Thread(new ThreadStart(Hilo_Reproduccion));
-            Hilo.Start();
+            Play(listaReproduccion[0]);
         }
 
         public void Play(string pathCancion)
         {
-            audioFileReader = new AudioFileReader(pathCancion);
-            waveOutDevice.Init(audioFileReader);
+            mp3Reader = new AudioFileReader(pathCancion);
+            waveOutDevice.Init(mp3Reader);
             waveOutDevice.Play();
         }
 
@@ -96,11 +95,6 @@ namespace HopeTag
             {
                 waveOutDevice.Dispose();
                 waveOutDevice = null;
-            }
-
-            if(Hilo != null)
-            {
-                Hilo.Abort();
             }
         }
     }

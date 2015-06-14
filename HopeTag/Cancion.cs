@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.IO;
 using TagLib;
 
@@ -11,6 +10,7 @@ namespace HopeTag
     [System.Serializable]
     class Cancion
     {
+        #region Variables
         private int numeroPista;
         public int NumeroPista
         {
@@ -67,47 +67,37 @@ namespace HopeTag
             set { bitrate = value; }
         }
 
+        private List<Bitmap> tagCaratula;
+        public List<Bitmap> TagCaratula
+        {
+            get { return tagCaratula; }
+            set { tagCaratula = value; }
+        }
+
+        private Bitmap tagCaratulaPrincipal;
+        public Bitmap TagCaratulaPrincipal
+        {
+            get { return tagCaratulaPrincipal; }
+            set { tagCaratulaPrincipal = value; }
+        }
+
+        #endregion
+
+        #region Constructores
         public Cancion()
         {
-
+            TagCaratula = new List<Bitmap>();
         }
 
         public Cancion(string ruta)
         {
-            TagArtista = string.Empty;
-            TagAlbum = string.Empty;
-            TagAnyo = 0;
-
-            PathArchivo = ruta;
-            NombreCompletoPista = Path.GetFileName(PathArchivo);
-            TagLib.File file = TagLib.File.Create(ruta);
-
-            if (file.Tag.AlbumArtists.Count().Equals(0))
-            {
-                if (file.Tag.Artists.Count() > 0)
-                    TagArtista = file.Tag.Artists[0];
-            }
-            else
-            {
-                if(file.Tag.AlbumArtists.Count() > 0)
-                    TagArtista = file.Tag.AlbumArtists[0];
-            }
-
-
-            if(file.Tag.Album != null)
-                TagAlbum = file.Tag.Album;
-
-            TagAnyo = (int)file.Tag.Year;
-
-            NumeroPista = (int)file.Tag.Track;
-
-            if(file.Tag.Title != null)
-                NombrePista = file.Tag.Title;
-
-            Bitrate = (int)file.Properties.AudioBitrate;
-
-            file.Dispose();
+            TagCaratula = new List<Bitmap>();
+            Capturar_Tags(ruta);
         }
+
+        #endregion
+
+        #region Metodos Publicos
 
         public void Grabar_Datos_Tag()
         {
@@ -123,6 +113,17 @@ namespace HopeTag
                 file.Tag.Title = NombrePista;
                 file.Tag.Comment = "Candarian Demon";
 
+                TagLib.Picture caratulaPrincipal = new TagLib.Picture();
+                caratulaPrincipal.Type = TagLib.PictureType.FrontCover;
+                caratulaPrincipal.MimeType = System.Net.Mime.MediaTypeNames.Image.Jpeg;
+                caratulaPrincipal.Description = "Cover";
+                MemoryStream ms = new MemoryStream();
+                TagCaratulaPrincipal.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                ms.Position = 0;
+                caratulaPrincipal.Data = TagLib.ByteVector.FromStream(ms);
+                file.Tag.Pictures = new TagLib.IPicture[1] { caratulaPrincipal };
+                ms.Close();
+
                 file.Save();
                 file.Dispose();
             }
@@ -130,6 +131,65 @@ namespace HopeTag
             string nuevoPath = Path.Combine(Path.GetDirectoryName(PathArchivo), NombreCompletoPista);
             if(!nuevoPath.Equals(PathArchivo))
                 System.IO.File.Move(PathArchivo, nuevoPath);
+        }
+
+        #endregion
+
+        #region Metodos Internos
+
+        private void Capturar_Tags(string ruta)
+        {
+            TagArtista = string.Empty;
+            TagAlbum = string.Empty;
+            TagAnyo = 0;
+
+            PathArchivo = ruta;
+            NombreCompletoPista = Path.GetFileName(PathArchivo);
+            TagLib.File file = TagLib.File.Create(ruta);
+
+            //Buscar Artista
+            if (file.Tag.AlbumArtists.Count().Equals(0))
+            {
+                if (file.Tag.Artists.Count() > 0)
+                    TagArtista = file.Tag.Artists[0];
+            }
+            else
+            {
+                if (file.Tag.AlbumArtists.Count() > 0)
+                    TagArtista = file.Tag.AlbumArtists[0];
+            }
+
+            //Buscar Nombre Album
+            if (file.Tag.Album != null)
+                TagAlbum = file.Tag.Album;
+
+            //Buscar Año de grabacion
+            TagAnyo = (int)file.Tag.Year;
+
+            //Buscar Numero de Pista
+            NumeroPista = (int)file.Tag.Track;
+
+            //Buscar Titulo de la pista
+            if (file.Tag.Title != null)
+                NombrePista = file.Tag.Title;
+
+            //Buscar Bitrate de la pista
+            Bitrate = (int)file.Properties.AudioBitrate;
+
+            //Insertamos las imagenes a los picturebox si existieran
+            foreach (IPicture picture in file.Tag.Pictures)
+            {
+                Bitmap caratulaAux;
+                MemoryStream memStream = new MemoryStream(picture.Data.Data);
+
+                caratulaAux = (Bitmap)Image.FromStream(memStream);
+                caratulaAux.Tag = picture.Type.ToString();
+                tagCaratula.Add(caratulaAux);
+
+                memStream.Close();
+            }
+
+            file.Dispose();
         }
 
         private void Vaciar_Tags(TagLib.File file)
@@ -157,5 +217,7 @@ namespace HopeTag
             file.Tag.TrackCount = 0;
             file.Tag.Year = 0;
         }
+
+        #endregion
     }
 }

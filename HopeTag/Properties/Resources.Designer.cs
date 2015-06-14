@@ -63,6 +63,16 @@ namespace HopeTag.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap caratulaNoDisponible {
+            get {
+                object obj = ResourceManager.GetObject("caratulaNoDisponible", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cross_Folder_icon {
             get {
                 object obj = ResourceManager.GetObject("Cross-Folder-icon", resourceCulture);

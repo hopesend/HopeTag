@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Album.cs" />
+    <Compile Include="BusquedaImagenes.cs" />
     <Compile Include="Cancion.cs" />
     <Compile Include="Configuracion.cs" />
     <Compile Include="cXML.cs" />
@@ -130,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\volume_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\caratulaNoDisponible.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

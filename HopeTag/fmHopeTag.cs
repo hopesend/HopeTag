@@ -95,6 +95,13 @@ namespace HopeTag
 
                         break;
                     }
+
+                case 2: //Caratulas
+                    {
+                        if (lvAlbumes.SelectedItems.Count > 0)
+                            Buscar_Caratulas(Buscar_Album(lvAlbumes.SelectedItems[0].Text));
+                        break;
+                    }
             }
         }
 
@@ -476,6 +483,84 @@ namespace HopeTag
 
         #endregion
 
+        #region Pestaña Caratulas
+
+        private void Buscar_Caratulas(Album albumSeleccionado)
+        {
+            Bitmap caratulaAMostrar = null;
+            lvCaratulas.Items.Clear();
+            ilCaratulas.Images.Clear();
+
+            //Buscamos imagenes en la carpeta y en sus carpetas susperiores
+            Buscar_Caratulas_Carpetas(albumSeleccionado.PathAlbum);
+
+            //Buscamos imagenes en los Tags
+            foreach(Cancion cancionSeleccionada in albumSeleccionado.ListaCanciones)
+            {
+                foreach(Bitmap imagen in cancionSeleccionada.TagCaratula)
+                {
+                    if (caratulaAMostrar == null)
+                        caratulaAMostrar = imagen;
+                    else
+                    {
+                        if (caratulaAMostrar.ToString() != imagen.ToString())
+                        {
+                            ilCaratulas.Images.Add(imagen);
+                        }
+                    }
+                }
+            }
+
+            if (caratulaAMostrar == null)
+                caratulaAMostrar = HopeTag.Properties.Resources.caratulaNoDisponible;
+
+            lvCaratulas.View = View.LargeIcon;
+            ilCaratulas.ImageSize = new Size(100, 100);
+            lvCaratulas.LargeImageList = ilCaratulas;
+
+            for (int cont = 0; cont < ilCaratulas.Images.Count - 1; cont++)
+            {
+                ListViewItem itemImagen = new ListViewItem();
+                Image imagenCaratula = ilCaratulas.Images[cont];
+                itemImagen.ImageIndex = cont;
+                itemImagen.Text = imagenCaratula.Tag.ToString();
+                lvCaratulas.Items.Add(itemImagen);
+            }
+
+            pbCaratula.Image = caratulaAMostrar;
+        }
+
+        private void Buscar_Caratulas_Carpetas(string pathAlbum)
+        {
+            try 
+            { 
+                foreach(string archivo in System.IO.Directory.GetFiles(pathAlbum))
+                {
+                    try
+                    {
+                        if(!archivo.EndsWith(".mp3"))
+                            ilCaratulas.Images.Add(Image.FromFile(archivo));
+                    }
+                    catch { }
+                }
+
+                foreach (string dir in System.IO.Directory.GetDirectories(pathAlbum)) 
+                {
+                    Buscar_Caratulas_Carpetas(dir);
+                } 
+            } 
+            catch
+            {
+            } 
+        }
+
+        private void lvCaratulas_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
         #region Metodos
 
         private void Capturar_Albumes(string pathDirectorioTrabajo)
@@ -697,6 +782,6 @@ namespace HopeTag
 
         #endregion                
 
-        
+ 
     }
 }
